@@ -1,8 +1,8 @@
 import { IServiceLocator } from 'ts-ioc-container';
-import { createLocatorBuilder } from '../application';
 import { prodEnv } from './env/prodEnv';
 import { devEnv } from './env/devEnv';
 import { ArgumentOutOfRangeError } from '../core/errors/ArgumentOutOfRangeError';
+import { createLocatorBuilder } from '../application/locator';
 
 export type EnvType = 'development' | 'production';
 

@@ -1,4 +1,5 @@
-import { IDisposable, ILogger } from '../application';
+import { ILogger } from '../application/domain/ILogger';
+import { IDisposable } from '../core/IDisposable';
 
 export class ConsoleLogger implements ILogger, IDisposable {
   constructor(private prefix: string) {}

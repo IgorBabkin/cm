@@ -1,7 +1,7 @@
 import { InjectionToken, IProvider, IServiceLocator, ProviderKey } from 'ts-ioc-container';
-import { createLocatorBuilder } from '../index';
 import { IMock } from 'moq.ts';
 import { MoqProviderStorage } from './MoqProviderStorage';
+import { createLocatorBuilder } from '../locator';
 
 export class UnitTestServiceLocator implements IServiceLocator {
   private mockedStorage: MoqProviderStorage;
