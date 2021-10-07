@@ -1,15 +1,16 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { TodoList } from './TodoList';
-import { ILogger, ILoggerKey } from '../../../../application';
-import { useDependency } from 'react-ts-ioc-container';
-import { IScopeContextKey } from '../../../core/react-ts-ioc-container/IScopeContextKey';
+import { LoadTodoList, TodoNotificationSaga } from '../../../../application';
+import { useCommand, useSaga } from '../../../core/react-clean-use-case/useCases';
 
 export const HomePage: FunctionComponent = () => {
-  const logger = useDependency<ILogger>(ILoggerKey);
-  const context = useDependency<string>(IScopeContextKey);
+  useSaga(TodoNotificationSaga);
+  const loadTodoList = useCommand(LoadTodoList);
+
   useEffect(() => {
-    logger.log(context);
-  });
+    loadTodoList.execute();
+  }, []);
+
   return (
     <div>
       <div className="mb-4">

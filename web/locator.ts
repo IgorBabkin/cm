@@ -11,11 +11,11 @@ export function createLocator(env: EnvType): IServiceLocator {
 
   switch (env) {
     case 'development':
-      locator = prodEnv(locator);
+      locator = devEnv(locator);
       break;
 
     case 'production':
-      locator = devEnv(locator);
+      locator = prodEnv(locator);
       break;
 
     default:
