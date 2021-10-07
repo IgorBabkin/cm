@@ -1,7 +1,7 @@
 import { ICommand } from 'clean-use-case';
 import { inject } from '../../decorators';
 import { IAssetList, IAssetListKey } from '../../domain/assets/IAssetList';
-import { IMetricList, IMetricListKey } from '../../domain/assets/IMetricList';
+import { IMetricList, IMetricListKey } from '../../domain/metrics/IMetricList';
 
 export class ResetFilters implements ICommand {
   constructor(

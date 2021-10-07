@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { IMetric } from './IMetric';
-import { Ticker } from './IAsset';
+import { Ticker } from '../assets/IAsset';
 
 export type MetricListFilterOptions = { searchText: string; ticker?: Ticker };
 export const IMetricListKey = Symbol.for('IMetricList');

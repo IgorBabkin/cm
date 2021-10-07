@@ -1,4 +1,4 @@
-import { MetricName } from './IMetric';
+import { MetricName } from '../metrics/IMetric';
 import { IAsset, IAssetState, Ticker } from './IAsset';
 
 export class Asset implements IAsset {

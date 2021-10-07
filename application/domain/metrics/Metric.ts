@@ -1,4 +1,4 @@
-import { Ticker } from './IAsset';
+import { Ticker } from '../assets/IAsset';
 import { IMetric, IMetricState, MetricName } from './IMetric';
 
 export class Metric implements IMetric {

@@ -1,5 +1,5 @@
 import { IQuery } from 'clean-use-case';
-import { IMetricList, IMetricListKey, MetricListFilterOptions } from '../../domain/assets/IMetricList';
+import { IMetricList, IMetricListKey, MetricListFilterOptions } from '../../domain/metrics/IMetricList';
 import { inject } from '../../decorators';
 import { Observable } from 'rxjs';
 

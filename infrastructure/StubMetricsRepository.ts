@@ -1,6 +1,6 @@
-import { IMetricsRepository } from '../application/domain/assets/IMetricsRepository';
-import { IMetric } from '../application/domain/assets/IMetric';
-import { Metric } from '../application/domain/assets/Metric';
+import { IMetricsRepository } from '../application/domain/metrics/IMetricsRepository';
+import { IMetric } from '../application/domain/metrics/IMetric';
+import { Metric } from '../application/domain/metrics/Metric';
 
 export class StubMetricsRepository implements IMetricsRepository {
   fetchAll(): Promise<IMetric[]> {

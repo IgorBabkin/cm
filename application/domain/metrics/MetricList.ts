@@ -2,7 +2,7 @@ import { combineLatest, map, Observable } from 'rxjs';
 import { ObservableStore } from 'reactivex-store';
 import { IMetricList, MetricListFilterOptions } from './IMetricList';
 import { IMetric } from './IMetric';
-import { AssetListFilterOptions } from './IAssetList';
+import { AssetListFilterOptions } from '../assets/IAssetList';
 
 export class MetricList implements IMetricList {
   private items$ = new ObservableStore<IMetric[]>([]);

@@ -1,6 +1,6 @@
 import { ICommand } from 'clean-use-case';
 import { inject } from '../../decorators';
-import { IMetricList, IMetricListKey, MetricListFilterOptions } from '../../domain/assets/IMetricList';
+import { IMetricList, IMetricListKey, MetricListFilterOptions } from '../../domain/metrics/IMetricList';
 
 export class FilterMetricList implements ICommand {
   constructor(@inject(IMetricListKey) private metricList: IMetricList) {}

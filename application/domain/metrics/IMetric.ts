@@ -1,4 +1,4 @@
-import { Ticker } from './IAsset';
+import { Ticker } from '../assets/IAsset';
 
 export type MetricName = string;
 

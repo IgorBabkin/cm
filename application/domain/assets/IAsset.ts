@@ -1,4 +1,4 @@
-import { MetricName } from './IMetric';
+import { MetricName } from '../metrics/IMetric';
 
 export type Ticker = string;
 
