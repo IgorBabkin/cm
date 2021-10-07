@@ -11,9 +11,13 @@ import { ConsoleLogger } from '../../infrastructure/ConsoleLogger';
 import { StubTodoRepository } from '../../infrastructure/StubTodoRepository';
 import { IAssetsRepositoryKey } from '../../application/domain/assets/IAssetsRepository';
 import { StubAssetsRepository } from '../../infrastructure/StubAssetsRepository';
-import { IAssetsStoreKey } from '../../application/domain/assets/IAssetsStore';
-import { AssetsStore } from '../../application/domain/assets/AssetsStore';
+import { AssetList } from '../../application/domain/assets/AssetList';
 import { assetTags } from './tags';
+import { IMetricListKey } from '../../application/domain/assets/IMetricList';
+import { IMetricsRepositoryKey } from '../../application/domain/assets/IMetricsRepository';
+import { StubMetricsRepository } from '../../infrastructure/StubMetricsRepository';
+import { MetricList } from '../../application/domain/assets/MetricList';
+import { IAssetListKey } from '../../application/domain/assets/IAssetList';
 
 export function devEnv(l: IServiceLocator): IServiceLocator {
   return (
@@ -28,10 +32,15 @@ export function devEnv(l: IServiceLocator): IServiceLocator {
       .register(ITodoStoreKey, ProviderBuilder.fromConstructor(TodoStore).asSingleton().forLevel(0).build())
 
       // Assets
-      .register(IAssetsStoreKey, ProviderBuilder.fromConstructor(AssetsStore).asSingleton().forTags(assetTags).build())
+      .register(IAssetListKey, ProviderBuilder.fromConstructor(AssetList).asSingleton().forTags(assetTags).build())
       .register(
         IAssetsRepositoryKey,
         ProviderBuilder.fromConstructor(StubAssetsRepository).asSingleton().forTags(assetTags).build(),
+      )
+      .register(IMetricListKey, ProviderBuilder.fromConstructor(MetricList).asSingleton().forTags(assetTags).build())
+      .register(
+        IMetricsRepositoryKey,
+        ProviderBuilder.fromConstructor(StubMetricsRepository).asSingleton().forTags(assetTags).build(),
       )
 
       // Common

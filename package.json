@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.10",
+    "@types/classnames": "^2.3.1",
     "@types/jest": "^27.0.2",
     "@types/react": "^17.0.27",
     "@types/react-dom": "^17.0.9",
@@ -45,7 +45,7 @@
     "webpack-notifier": "^1.14.0"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
+    "classnames": "^2.3.1",
     "clean-use-case": "^2.0.13",
     "mdb-react-ui-kit": "^1.0.0-beta5",
     "mdb-ui-kit": "^3.9.0",

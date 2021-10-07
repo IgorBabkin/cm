@@ -2,12 +2,12 @@ import { IQuery } from 'clean-use-case';
 import { IAsset } from '../../domain/assets/IAsset';
 import { Observable } from 'rxjs';
 import { inject } from '../../decorators';
-import { IAssetsStore, IAssetsStoreKey } from '../../domain/assets/IAssetsStore';
+import { IAssetList, IAssetListKey } from '../../domain/assets/IAssetList';
 
 export class AssetListQuery implements IQuery<IAsset[]> {
-  constructor(@inject(IAssetsStoreKey) private assetsStore: IAssetsStore) {}
+  constructor(@inject(IAssetListKey) private assetList: IAssetList) {}
 
   create(): Observable<IAsset[]> {
-    return this.assetsStore.getAssets$();
+    return this.assetList.getItems$();
   }
 }
