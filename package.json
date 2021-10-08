@@ -45,10 +45,10 @@
     "webpack-notifier": "^1.14.0"
   },
   "dependencies": {
+    "bulma": "^0.9.3",
+    "bulma-block-list": "^0.5.0",
     "classnames": "^2.3.1",
     "clean-use-case": "^2.0.13",
-    "mdb-react-ui-kit": "^1.0.0-beta5",
-    "mdb-ui-kit": "^3.9.0",
     "react": "^17.0.2",
     "react-clean-use-case": "^1.0.24",
     "react-dom": "^17.0.2",

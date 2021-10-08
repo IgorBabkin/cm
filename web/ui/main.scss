@@ -1,2 +1,20 @@
-@import "../../node_modules/mdb-react-ui-kit/dist/scss/mdb.free";
-@import "reset";
+@import "~bulma/bulma";
+@import "~bulma-block-list/src/block-list";
+@import "utils";
+
+.root {
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+//.list {
+//  width: 100%;
+//  > li {
+//    width: 100%;
+//    border-bottom: $panel-item-border;
+//  }
+//}

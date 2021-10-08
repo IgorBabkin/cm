@@ -1,0 +1,16 @@
+.assets-page {
+  height: 100%;
+}
+
+.assets-page-list {
+  width: 100%;
+}
+
+.list-panel {
+  display: flex;
+  flex-direction: column;
+
+  &__list {
+    flex-grow: 1;
+  }
+}
