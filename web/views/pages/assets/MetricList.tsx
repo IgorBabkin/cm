@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 
 interface AssetListProps {
   onSelect: (name: MetricName) => void;
-  selected$: Observable<MetricName>;
+  selected$: Observable<MetricName | undefined>;
 }
 
 export const MetricList: FC<AssetListProps> = ({ onSelect, selected$ }) => {

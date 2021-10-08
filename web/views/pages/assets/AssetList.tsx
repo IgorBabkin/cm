@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 
 interface AssetListProps {
   onSelect: (ticker: Ticker) => void;
-  selected$: Observable<Ticker>;
+  selected$: Observable<Ticker | undefined>;
 }
 
 export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {

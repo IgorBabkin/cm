@@ -10,9 +10,9 @@ import { map } from 'rxjs';
 
 export const AssetsPage: FC = () => {
   const filterAssetList = useCommand(FilterAssetList);
-  const selectedMetric$ = useQuery(AssetListFilterOptionsQuery, (q) => q.create().pipe(map(({ metric }) => metric!)));
+  const selectedMetric$ = useQuery(AssetListFilterOptionsQuery, (q) => q.create().pipe(map(({ metric }) => metric)));
   const filterMetricList = useCommand(FilterMetricList);
-  const selectedAsset$ = useQuery(MetricListFilterOptionsQuery, (q) => q.create().pipe(map(({ ticker }) => ticker!)));
+  const selectedAsset$ = useQuery(MetricListFilterOptionsQuery, (q) => q.create().pipe(map(({ ticker }) => ticker)));
 
   return (
     <div className="columns h-100 no-margin">
