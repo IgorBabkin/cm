@@ -26,6 +26,7 @@ export class AssetList implements IAssetList {
   }
 
   updateFilter(options: Partial<AssetListFilterOptions>): void {
+    console.log('Assets', options);
     this.filterOptions$.map((current) => ({ ...current, ...options }));
   }
 

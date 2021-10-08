@@ -27,6 +27,7 @@ export class MetricList implements IMetricList {
   }
 
   updateFilter(options: Partial<AssetListFilterOptions>): void {
+    console.log('Metrics', options);
     this.filterOptions$.map((current) => ({ ...current, ...options }));
   }
 
