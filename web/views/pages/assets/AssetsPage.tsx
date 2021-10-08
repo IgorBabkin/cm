@@ -15,7 +15,7 @@ export const AssetsPage: FC = () => {
   const selectedAsset$ = useQuery(MetricListFilterOptionsQuery, (q) => q.create().pipe(map(({ ticker }) => ticker)));
 
   return (
-    <div className="columns h-100 no-margin">
+    <div className="columns h-100 m-0">
       <div className="column h-100">
         <AssetList onSelect={(ticker) => filterMetricList.execute({ ticker })} selected$={selectedAsset$} />
       </div>
