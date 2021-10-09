@@ -1,10 +1,11 @@
 import React, { FC, useContext, useEffect, useMemo } from 'react';
 import { Each, useObservables } from 'reactivex-react';
 import cn from 'classnames';
-import { isMetricValid, MetricName } from '../../../domain/metrics/IMetric';
-import { combineLatest, map, Observable } from 'rxjs';
-import { MetricFilterOptionsContext, MetricListContext, updateAssetFilter } from './context';
+import { MetricName } from '../../../domain/metrics/Metric';
+import { Observable } from 'rxjs';
+import { MetricFilterOptionsContext, MetricListContext } from './context';
 import { fetchMetrics } from '../../../api/api';
+import { filterMetrics, loadMetrics, resetMetricFilter, updateAssetFilter } from '../../../domain/useCases';
 
 interface AssetListProps {
   onSelect: (name: MetricName) => void;
@@ -16,13 +17,10 @@ export const MetricList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
 
   const options$ = useContext(MetricFilterOptionsContext);
   const list$ = useContext(MetricListContext);
-  const filteredList$ = useMemo(
-    () => combineLatest([list$, options$]).pipe(map(([list, options]) => list.filter(isMetricValid(options)))),
-    [list$, options$],
-  );
+  const filteredList$ = useMemo(() => filterMetrics(list$, options$), [list$, options$]);
 
   useEffect(() => {
-    const subscription = fetchMetrics().subscribe(list$);
+    const subscription = loadMetrics(list$);
     return () => subscription.unsubscribe();
   }, []);
 
@@ -55,10 +53,7 @@ export const MetricList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
         </ul>
       </div>
       <div className="panel-block">
-        <button
-          className="button is-link is-outlined is-fullwidth"
-          onClick={() => updateAssetFilter(options$, { searchText: '' })}
-        >
+        <button className="button is-fullwidth" onClick={() => resetMetricFilter(options$)}>
           Reset all filters
         </button>
       </div>

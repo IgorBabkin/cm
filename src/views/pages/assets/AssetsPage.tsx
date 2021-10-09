@@ -1,13 +1,9 @@
 import React, { FC, useContext, useMemo } from 'react';
 import { AssetList } from './AssetList';
 import { MetricList } from './MetricList';
-import {
-  AssetFilterOptionsContext,
-  MetricFilterOptionsContext,
-  updateAssetFilter,
-  updateMetricFilter,
-} from './context';
+import { AssetFilterOptionsContext, MetricFilterOptionsContext } from './context';
 import { map } from 'rxjs';
+import { updateAssetFilter, updateMetricFilter } from '../../../domain/useCases';
 
 export const AssetsPage: FC = () => {
   const assetListFilterOptions$ = useContext(AssetFilterOptionsContext);
