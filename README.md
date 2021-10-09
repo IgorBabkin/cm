@@ -15,7 +15,7 @@ yarn start
 
 # Enterprise
 ```shell
-git checkout origin/enterprise enterprise
+git checkout -b enterprise --track origin/enterprise
 yarn install
 yarn start
 ```
