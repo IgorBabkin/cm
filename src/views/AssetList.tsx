@@ -1,12 +1,12 @@
 import React, { FC, useContext, useEffect, useMemo } from 'react';
 import { Each, useObservables } from 'reactivex-react';
 import cn from 'classnames';
-import { Ticker } from '../../../domain/assets/Asset';
+import { Ticker } from '../domain/assets/Asset';
 import { Observable } from 'rxjs';
 import { AssetFilterOptionsContext, AssetListContext } from './context';
-import { filterAssets, loadAssets, resetAssetFilter, updateMetricFilter } from '../../../domain/useCases';
-import { SearchInput } from '../../../ui/SearchInput';
-import { Button } from '../../../ui/Button';
+import { filterAssets, loadAssets, resetAssetFilter, updateMetricFilter } from '../domain/useCases';
+import { SearchInput } from '../ui/SearchInput';
+import { Button } from '../ui/Button';
 
 interface AssetListProps {
   onSelect: (ticker: Ticker) => void;
