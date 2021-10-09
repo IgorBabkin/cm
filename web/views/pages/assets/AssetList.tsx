@@ -1,14 +1,10 @@
-import React, { FC, useEffect } from 'react';
-import { useCommand, useQuery } from '../../../core/react-clean-use-case/useCases';
-import { AssetListQuery } from '../../../../application/useCases/assets/AssetListQuery';
+import React, { FC, useContext, useEffect, useMemo } from 'react';
 import { Each, useObservables } from 'reactivex-react';
-import { FilterAssetList } from '../../../../application/useCases/assets/FilterAssetList';
-import { AssetListFilterOptionsQuery } from '../../../../application/useCases/assets/AssetListFilterOptionsQuery';
 import cn from 'classnames';
-import { ResetAssetFilters } from '../../../../application/useCases/assets/ResetAssetFilters';
-import { Ticker } from '../../../../application/domain/assets/IAsset';
-import { LoadAssetLists } from '../../../../application/useCases/assets/LoadAssetLists';
-import { Observable } from 'rxjs';
+import { isAssetValid, Ticker } from '../../../domain/assets/IAsset';
+import { combineLatest, map, Observable } from 'rxjs';
+import { AssetFilterOptionsContext, AssetListContext, updateMetricFilter } from './context';
+import { fetchAssets } from '../../../api/api';
 
 interface AssetListProps {
   onSelect: (ticker: Ticker) => void;
@@ -18,13 +14,17 @@ interface AssetListProps {
 export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
   const $ = useObservables();
 
-  const loadList = useCommand(LoadAssetLists);
-  const resetAssetFilters = useCommand(ResetAssetFilters);
-  const assetList$ = useQuery(AssetListQuery, (q) => q.create());
-  const filterAssetList = useCommand(FilterAssetList);
-  const assetListFilterOptions$ = useQuery(AssetListFilterOptionsQuery, (q) => q.create());
+  const options$ = useContext(AssetFilterOptionsContext);
+  const list$ = useContext(AssetListContext);
+  const filteredList$ = useMemo(
+    () => combineLatest([list$, options$]).pipe(map(([list, options]) => list.filter(isAssetValid(options)))),
+    [list$, options$],
+  );
 
-  useEffect(() => loadList.execute(), []);
+  useEffect(() => {
+    const subscription = fetchAssets().subscribe(list$);
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <div className="panel h-100 flex-panel">
@@ -35,8 +35,8 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
             className="input"
             type="text"
             placeholder="Search"
-            value={$(assetListFilterOptions$)!.searchText}
-            onChange={({ target }) => filterAssetList.execute({ searchText: target.value })}
+            value={$(options$)!.searchText}
+            onChange={({ target }) => updateMetricFilter(options$, { searchText: target.value })}
           />
           <span className="icon is-left">
             <i className="fas fa-search" aria-hidden="true" />
@@ -45,7 +45,7 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
       </div>
       <div className="panel-block grow-1 no-overflow">
         <ul className="block-list w-100 h-100 auto-scroll">
-          <Each obs$={assetList$}>
+          <Each obs$={filteredList$}>
             {({ ticker, title }) => (
               <li
                 key={ticker}
@@ -59,7 +59,10 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
         </ul>
       </div>
       <div className="panel-block">
-        <button className="button is-link is-outlined is-fullwidth" onClick={() => resetAssetFilters.execute()}>
+        <button
+          className="button is-link is-outlined is-fullwidth"
+          onClick={() => updateMetricFilter(options$, { searchText: '' })}
+        >
           Reset all filters
         </button>
       </div>
