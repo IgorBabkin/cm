@@ -10,6 +10,7 @@ import { Button } from '../../ui/Button';
 import { AssetItem } from './AssetItem';
 import { fetchAssets } from '../../api/api';
 import { not } from '../../utils/common';
+import { ProgressBar } from '../../ui/ProgressBar';
 
 interface AssetListProps {
   onSelect: (ticker: Ticker) => void;
@@ -59,7 +60,7 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
       </div>
       <div className="panel-block grow-1 no-overflow">
         <If predicate={not} obs$={isLoaded$}>
-          <progress className="progress is-small is-info" />
+          <ProgressBar />
         </If>
         <If obs$={isLoaded$}>
           <ul className="block-list w-100 h-100 auto-scroll">
