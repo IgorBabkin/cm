@@ -7,6 +7,7 @@ import { useMetricFilterOptions, useMetricList } from './context';
 import { filterMetrics, loadMetrics, resetMetricFilter, updateAssetFilter } from '../domain/useCases';
 import { SearchInput } from '../ui/SearchInput';
 import { Button } from '../ui/Button';
+import { MetricItem } from './MetricItem';
 
 interface AssetListProps {
   onSelect: (name: MetricName) => void;
@@ -55,9 +56,13 @@ export const MetricList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
       <div className="panel-block grow-1 no-overflow">
         <ul className="block-list w-100 h-100 auto-scroll">
           <Each obs$={filteredList$}>
-            {({ name, title }) => (
-              <li key={name} className={cn({ 'is-highlighted': name === $(selected$) })} onClick={() => onSelect(name)}>
-                {title}
+            {(item) => (
+              <li
+                key={item.name}
+                className={cn({ 'is-highlighted': item.name === $(selected$) })}
+                onClick={() => onSelect(item.name)}
+              >
+                <MetricItem {...item} />
               </li>
             )}
           </Each>

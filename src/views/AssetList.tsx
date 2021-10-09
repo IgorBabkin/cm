@@ -7,6 +7,7 @@ import { useAssetFilterOptions, useAssetList } from './context';
 import { filterAssets, loadAssets, resetAssetFilter, updateMetricFilter } from '../domain/useCases';
 import { SearchInput } from '../ui/SearchInput';
 import { Button } from '../ui/Button';
+import { AssetItem } from './AssetItem';
 
 interface AssetListProps {
   onSelect: (ticker: Ticker) => void;
@@ -55,13 +56,13 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
       <div className="panel-block grow-1 no-overflow">
         <ul className="block-list w-100 h-100 auto-scroll">
           <Each obs$={filteredList$}>
-            {({ ticker, title }) => (
+            {(item) => (
               <li
-                key={ticker}
-                className={cn({ 'is-highlighted': ticker === $(selected$) })}
-                onClick={() => onSelect(ticker)}
+                key={item.ticker}
+                className={cn({ 'is-highlighted': item.ticker === $(selected$) })}
+                onClick={() => onSelect(item.ticker)}
               >
-                {title}
+                <AssetItem {...item} />
               </li>
             )}
           </Each>

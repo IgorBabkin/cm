@@ -5,13 +5,13 @@ export type MetricName = string;
 
 export interface Metric {
   name: MetricName;
-  title: string;
+  description: string;
   assets: Ticker[];
 }
 
-const hasText = ({ name, title }: Metric, searchText: string): boolean => {
+const hasText = ({ name, description }: Metric, searchText: string): boolean => {
   const text = searchText.toLowerCase();
-  return name.toLowerCase().search(text) !== -1 || title.toLowerCase().search(text) !== -1;
+  return name.toLowerCase().search(text) !== -1 || description.toLowerCase().search(text) !== -1;
 };
 
 const hasAsset = ({ assets }: Metric, ticker: Ticker): boolean => {

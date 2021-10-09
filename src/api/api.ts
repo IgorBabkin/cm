@@ -10,7 +10,7 @@ const BASE_URL = 'https://community-api.coinmetrics.io';
 function toMetricState(value: MetricPersistence): Metric {
   return {
     name: value.metric,
-    title: value.full_name,
+    description: value.full_name,
     assets: distinct(value.frequencies.flatMap((i) => i.assets)),
   };
 }
