@@ -3,7 +3,8 @@ import { AssetList } from './AssetList';
 import { MetricList } from './MetricList';
 import { useAssetFilterOptions, useMetricFilterOptions } from './context';
 import { map } from 'rxjs';
-import { updateAssetFilter, updateMetricFilter } from '../domain/useCases';
+import { resetAllFilters, updateAssetFilter, updateMetricFilter } from '../domain/useCases';
+import { Button } from '../ui/Button';
 
 export const Application: FC = () => {
   const assetFilterOptions$ = useAssetFilterOptions();
@@ -12,18 +13,25 @@ export const Application: FC = () => {
   const selectedAsset$ = useMemo(() => metricFilterOptions$.pipe(map((v) => v.ticker)), [metricFilterOptions$]);
 
   return (
-    <div className="columns h-100 m-0">
-      <div className="column h-100">
-        <AssetList
-          onSelect={(ticker) => updateMetricFilter(metricFilterOptions$, { ticker })}
-          selected$={selectedAsset$}
-        />
+    <div className="h-100 flex-panel">
+      <div className="block is-flex is-justify-content-center mt-5">
+        <Button danger onClick={() => resetAllFilters(assetFilterOptions$, metricFilterOptions$)}>
+          Reset all filters
+        </Button>
       </div>
-      <div className="column h-100">
-        <MetricList
-          onSelect={(metric) => updateAssetFilter(assetFilterOptions$, { metric })}
-          selected$={selectedMetric$}
-        />
+      <div className="columns grow-1 no-overflow m-0">
+        <div className="column h-100">
+          <AssetList
+            onSelect={(ticker) => updateMetricFilter(metricFilterOptions$, { ticker })}
+            selected$={selectedAsset$}
+          />
+        </div>
+        <div className="column h-100">
+          <MetricList
+            onSelect={(metric) => updateAssetFilter(assetFilterOptions$, { metric })}
+            selected$={selectedMetric$}
+          />
+        </div>
       </div>
     </div>
   );

@@ -57,3 +57,11 @@ export const filterMetrics = (
 ): Observable<Metric[]> => {
   return combineLatest([list$, options$]).pipe(map(([list, options]) => list.filter(isMetricValid(options))));
 };
+
+export const resetAllFilters = (
+  assetFilter$: Subject<AssetFilterOptions>,
+  metricFilter$: Subject<MetricFilterOptions>,
+) => {
+  assetFilter$.next({ searchText: '' });
+  metricFilter$.next({ searchText: '' });
+};
