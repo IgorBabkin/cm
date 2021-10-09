@@ -27,7 +27,20 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
 
   return (
     <div className="panel h-100 flex-panel">
-      <div className="panel-heading">Assets</div>
+      <div className="panel-heading">
+        <div className="level">
+          <div className="level-left">
+            <div className="level-item">Assets</div>
+          </div>
+          <div className="level-right">
+            <div className="level-item">
+              <span className="tag is-primary">
+                {$(filteredList$)?.length} of {$(list$)?.length}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="panel-block">
         <p className="control has-icons-left">
           <SearchInput
@@ -56,7 +69,7 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
       </div>
       <div className="panel-block">
         <Button fullwidth onClick={() => resetAssetFilter(options$)}>
-          Reset all filters
+          Reset filters
         </Button>
       </div>
     </div>
