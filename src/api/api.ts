@@ -5,7 +5,8 @@ import { ajax } from 'rxjs/ajax';
 import { Asset } from '../domain/assets/Asset';
 import { distinct } from '../utils/common';
 
-const BASE_URL = 'https://community-api.coinmetrics.io';
+const BASE_URL =
+  process.env.NODE_ENV === 'development' ? 'https://community-api.coinmetrics.io' : 'https://api.coinmetrics.io';
 
 function toMetricState(value: MetricPersistence): Metric {
   return {

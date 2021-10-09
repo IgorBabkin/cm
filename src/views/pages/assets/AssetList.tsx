@@ -5,6 +5,8 @@ import { Ticker } from '../../../domain/assets/Asset';
 import { Observable } from 'rxjs';
 import { AssetFilterOptionsContext, AssetListContext } from './context';
 import { filterAssets, loadAssets, resetAssetFilter, updateMetricFilter } from '../../../domain/useCases';
+import { SearchInput } from '../../../ui/SearchInput';
+import { Button } from '../../../ui/Button';
 
 interface AssetListProps {
   onSelect: (ticker: Ticker) => void;
@@ -28,12 +30,9 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
       <div className="panel-heading">Assets</div>
       <div className="panel-block">
         <p className="control has-icons-left">
-          <input
-            className="input"
-            type="text"
-            placeholder="Search"
+          <SearchInput
             value={$(options$)!.searchText}
-            onChange={({ target }) => updateMetricFilter(options$, { searchText: target.value })}
+            onChange={(searchText) => updateMetricFilter(options$, { searchText })}
           />
           <span className="icon is-left">
             <i className="fas fa-search" aria-hidden="true" />
@@ -56,9 +55,9 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
         </ul>
       </div>
       <div className="panel-block">
-        <button className="button is-fullwidth" onClick={() => resetAssetFilter(options$)}>
+        <Button fullwidth onClick={() => resetAssetFilter(options$)}>
           Reset all filters
-        </button>
+        </Button>
       </div>
     </div>
   );

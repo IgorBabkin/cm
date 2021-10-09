@@ -4,8 +4,9 @@ import cn from 'classnames';
 import { MetricName } from '../../../domain/metrics/Metric';
 import { Observable } from 'rxjs';
 import { MetricFilterOptionsContext, MetricListContext } from './context';
-import { fetchMetrics } from '../../../api/api';
 import { filterMetrics, loadMetrics, resetMetricFilter, updateAssetFilter } from '../../../domain/useCases';
+import { SearchInput } from '../../../ui/SearchInput';
+import { Button } from '../../../ui/Button';
 
 interface AssetListProps {
   onSelect: (name: MetricName) => void;
@@ -29,12 +30,9 @@ export const MetricList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
       <div className="panel-heading">Metrics</div>
       <div className="panel-block">
         <p className="control has-icons-left">
-          <input
-            className="input"
-            type="text"
-            placeholder="Search"
+          <SearchInput
             value={$(options$)!.searchText}
-            onChange={({ target }) => updateAssetFilter(options$, { searchText: target.value })}
+            onChange={(searchText) => updateAssetFilter(options$, { searchText })}
           />
           <span className="icon is-left">
             <i className="fas fa-search" aria-hidden="true" />
@@ -53,9 +51,9 @@ export const MetricList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
         </ul>
       </div>
       <div className="panel-block">
-        <button className="button is-fullwidth" onClick={() => resetMetricFilter(options$)}>
+        <Button fullwidth onClick={() => resetMetricFilter(options$)}>
           Reset all filters
-        </button>
+        </Button>
       </div>
     </div>
   );
