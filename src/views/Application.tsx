@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react';
-import { AssetList } from './AssetList';
-import { MetricList } from './MetricList';
+import { AssetList } from './assets/AssetList';
+import { MetricList } from './metrics/MetricList';
 import { useAssetFilterOptions, useMetricFilterOptions } from './context';
 import { map } from 'rxjs';
 import { resetAllFilters, updateAssetFilter, updateMetricFilter } from '../domain/useCases';

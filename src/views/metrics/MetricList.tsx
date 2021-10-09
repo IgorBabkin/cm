@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useMemo } from 'react';
 import { Each, useObservables } from 'reactivex-react';
 import cn from 'classnames';
-import { MetricName } from '../domain/metrics/Metric';
+import { MetricName } from '../../domain/metrics/Metric';
 import { Observable } from 'rxjs';
-import { useMetricFilterOptions, useMetricList } from './context';
-import { filterMetrics, loadMetrics, resetMetricFilter, updateAssetFilter } from '../domain/useCases';
-import { SearchInput } from '../ui/SearchInput';
-import { Button } from '../ui/Button';
+import { useMetricFilterOptions, useMetricList } from '../context';
+import { filterMetrics, loadMetrics, resetMetricFilter, updateAssetFilter } from '../../domain/useCases';
+import { SearchInput } from '../../ui/SearchInput';
+import { Button } from '../../ui/Button';
 import { MetricItem } from './MetricItem';
 
 interface AssetListProps {
