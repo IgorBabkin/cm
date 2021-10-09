@@ -1,11 +1,10 @@
 /* eslint-disable */
-const { BUILD_PATH } = require('../env');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = (mode) => ({
   mode,
-  context: path.resolve(__dirname, '../web'),
+  context: path.resolve(__dirname, './src'),
 
   entry: {
     app: ['./entry.tsx'],
@@ -14,7 +13,7 @@ module.exports = (mode) => ({
 
   output: {
     filename: '[name].[hash].js',
-    path: path.resolve(BUILD_PATH, './web/assets'),
+    path: path.resolve(__dirname, './assets'),
   },
 
   resolve: {

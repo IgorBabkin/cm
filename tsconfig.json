@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
     "lib": ["es2017", "dom"],
     "sourceMap": true,
     "target": "ES6",

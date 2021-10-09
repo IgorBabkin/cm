@@ -11,3 +11,5 @@ export interface MetricPersistence {
     assets: string[];
   }[];
 }
+
+export type CommunityResponse<T> = { data: T };

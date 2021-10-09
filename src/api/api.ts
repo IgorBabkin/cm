@@ -1,9 +1,9 @@
 import { IMetricState } from '../domain/metrics/IMetric';
-import { AssetPersistence, MetricPersistence } from './persistence';
-import { map, Observable } from 'rxjs';
+import { AssetPersistence, CommunityResponse, MetricPersistence } from './persistence';
+import { catchError, map, Observable, of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { distinct } from '../utils/utils';
 import { IAssetState } from '../domain/assets/IAsset';
+import { distinct } from '../utils/common';
 
 const BASE_URL = 'https://community-api.coinmetrics.io';
 
@@ -17,8 +17,8 @@ function toMetricState(value: MetricPersistence): IMetricState {
 
 export function fetchMetrics(): Observable<IMetricState[]> {
   return ajax
-    .getJSON<MetricPersistence[]>(`${BASE_URL}/v4/catalog/metrics`)
-    .pipe(map((items) => items.map((i) => toMetricState(i))));
+    .getJSON<CommunityResponse<MetricPersistence[]>>(`${BASE_URL}/v4/catalog/metrics`)
+    .pipe(map(({ data }) => data.map((i) => toMetricState(i))));
 }
 
 function toAssetState(value: AssetPersistence): IAssetState {
@@ -31,6 +31,6 @@ function toAssetState(value: AssetPersistence): IAssetState {
 
 export function fetchAssets(): Observable<IAssetState[]> {
   return ajax
-    .getJSON<AssetPersistence[]>(`${BASE_URL}/v4/catalog/assets`)
-    .pipe(map((items) => items.map((i) => toAssetState(i))));
+    .getJSON<CommunityResponse<AssetPersistence[]>>(`${BASE_URL}/v4/catalog/assets`)
+    .pipe(map(({ data }) => data.map((i) => toAssetState(i))));
 }
