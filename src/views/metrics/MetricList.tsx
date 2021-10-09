@@ -29,7 +29,7 @@ export const MetricList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
   useEffect(() => {
     const subscription = loadMetrics$.subscribe(list$);
     return () => subscription.unsubscribe();
-  }, [loadMetrics$]);
+  }, [loadMetrics$, list$]);
 
   return (
     <div className="panel h-100 flex-panel">

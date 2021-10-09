@@ -29,7 +29,7 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
   useEffect(() => {
     const subscription = loadAssets$.subscribe(list$);
     return () => subscription.unsubscribe();
-  }, [loadAssets$]);
+  }, [loadAssets$, list$]);
 
   return (
     <div className="panel h-100 flex-panel">
