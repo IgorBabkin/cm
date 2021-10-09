@@ -9,8 +9,7 @@ export const createAssets = () => new BehaviorSubject<Asset[]>([]);
 export const createAssetFilter = () => new BehaviorSubject<AssetFilterOptions>({ searchText: '' });
 
 export const loadAssets = (list$: Subject<Asset[]>): Subscription => {
-  const observable = fetchAssets();
-  return observable.subscribe(list$);
+  return fetchAssets().subscribe(list$);
 };
 
 export const filterEmptyAssets = (list$: Observable<Asset[]>): Observable<Asset[]> => {
