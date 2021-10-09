@@ -12,3 +12,10 @@ npm start
 #or
 yarn start
 ```
+
+# Enterprise
+```shell
+git checkout origin/enterprise enterprise
+yarn install
+yarn start
+```
