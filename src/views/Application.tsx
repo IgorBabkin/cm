@@ -1,13 +1,13 @@
-import React, { FC, useContext, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import { AssetList } from './AssetList';
 import { MetricList } from './MetricList';
-import { AssetFilterOptionsContext, MetricFilterOptionsContext } from './context';
+import { useAssetFilterOptions, useMetricFilterOptions } from './context';
 import { map } from 'rxjs';
 import { updateAssetFilter, updateMetricFilter } from '../domain/useCases';
 
 export const Application: FC = () => {
-  const assetFilterOptions$ = useContext(AssetFilterOptionsContext);
-  const metricFilterOptions$ = useContext(MetricFilterOptionsContext);
+  const assetFilterOptions$ = useAssetFilterOptions();
+  const metricFilterOptions$ = useMetricFilterOptions();
   const selectedMetric$ = useMemo(() => assetFilterOptions$.pipe(map((v) => v.metric)), [assetFilterOptions$]);
   const selectedAsset$ = useMemo(() => metricFilterOptions$.pipe(map((v) => v.ticker)), [metricFilterOptions$]);
 

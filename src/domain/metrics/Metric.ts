@@ -1,4 +1,4 @@
-import { Ticker } from '../assets/Asset';
+import { Asset, Ticker } from '../assets/Asset';
 import { MetricFilterOptions } from './MetricFilterOptions';
 
 export type MetricName = string;
@@ -22,3 +22,5 @@ export const isMetricValid =
   ({ ticker, searchText }: MetricFilterOptions) =>
   (item: Metric) =>
     (!ticker || hasAsset(item, ticker)) && (searchText.length === 0 || hasText(item, searchText));
+
+export const byName = (a: Metric, b: Metric) => a.name.localeCompare(b.name);

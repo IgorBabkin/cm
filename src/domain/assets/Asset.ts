@@ -22,3 +22,6 @@ export const isAssetValid =
   ({ metric, searchText }: AssetFilterOptions) =>
   (item: Asset) =>
     (!metric || hasMetric(item, metric)) && (searchText.length === 0 || hasText(item, searchText));
+
+export const hasAtLeastOneMetric = (item: Asset) => item.metrics.length > 0;
+export const byTicker = (a: Asset, b: Asset) => a.ticker.localeCompare(b.ticker);

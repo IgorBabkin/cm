@@ -1,9 +1,9 @@
-import React, { FC, useContext, useEffect, useMemo } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { Each, useObservables } from 'reactivex-react';
 import cn from 'classnames';
 import { Ticker } from '../domain/assets/Asset';
 import { Observable } from 'rxjs';
-import { AssetFilterOptionsContext, AssetListContext } from './context';
+import { useAssetFilterOptions, useAssetList } from './context';
 import { filterAssets, loadAssets, resetAssetFilter, updateMetricFilter } from '../domain/useCases';
 import { SearchInput } from '../ui/SearchInput';
 import { Button } from '../ui/Button';
@@ -16,8 +16,8 @@ interface AssetListProps {
 export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
   const $ = useObservables();
 
-  const options$ = useContext(AssetFilterOptionsContext);
-  const list$ = useContext(AssetListContext);
+  const options$ = useAssetFilterOptions();
+  const list$ = useAssetList();
   const filteredList$ = useMemo(() => filterAssets(list$, options$), [list$, options$]);
 
   useEffect(() => {
