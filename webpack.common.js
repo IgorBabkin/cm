@@ -13,7 +13,7 @@ module.exports = (mode) => ({
 
   output: {
     filename: '[name].[hash].js',
-    path: path.resolve(__dirname, './assets'),
+    path: path.resolve(__dirname, './build/assets'),
   },
 
   resolve: {
