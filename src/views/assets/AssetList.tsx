@@ -1,13 +1,15 @@
 import React, { FC, useEffect, useMemo } from 'react';
-import { Each, useObservables } from 'reactivex-react';
+import { Each, If, useObservables } from 'reactivex-react';
 import cn from 'classnames';
 import { Ticker } from '../../domain/assets/Asset';
-import { Observable } from 'rxjs';
+import { mapTo, Observable, shareReplay, startWith } from 'rxjs';
 import { useAssetFilterOptions, useAssetList } from '../context';
-import { filterAssets, loadAssets, resetAssetFilter, updateMetricFilter } from '../../domain/useCases';
+import { filterAssets, resetAssetFilter, updateMetricFilter } from '../../domain/useCases';
 import { SearchInput } from '../../ui/SearchInput';
 import { Button } from '../../ui/Button';
 import { AssetItem } from './AssetItem';
+import { fetchAssets } from '../../api/api';
+import { not } from '../../utils/common';
 
 interface AssetListProps {
   onSelect: (ticker: Ticker) => void;
@@ -19,12 +21,14 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
 
   const options$ = useAssetFilterOptions();
   const list$ = useAssetList();
+  const loadAssets$ = useMemo(() => fetchAssets().pipe(shareReplay(1)), []);
+  const isLoaded$ = useMemo(() => loadAssets$.pipe(mapTo(true)), [loadAssets$]);
   const filteredList$ = useMemo(() => filterAssets(list$, options$), [list$, options$]);
 
   useEffect(() => {
-    const subscription = loadAssets(list$);
+    const subscription = loadAssets$.subscribe(list$);
     return () => subscription.unsubscribe();
-  }, []);
+  }, [loadAssets$, isLoaded$]);
 
   return (
     <div className="panel h-100 flex-panel">
@@ -54,19 +58,24 @@ export const AssetList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
         </p>
       </div>
       <div className="panel-block grow-1 no-overflow">
-        <ul className="block-list w-100 h-100 auto-scroll">
-          <Each obs$={filteredList$}>
-            {(item) => (
-              <li
-                key={item.ticker}
-                className={cn({ 'is-highlighted': item.ticker === $(selected$) })}
-                onClick={() => onSelect(item.ticker)}
-              >
-                <AssetItem {...item} />
-              </li>
-            )}
-          </Each>
-        </ul>
+        <If predicate={not} obs$={isLoaded$}>
+          <progress className="progress is-small is-info" />
+        </If>
+        <If obs$={isLoaded$}>
+          <ul className="block-list w-100 h-100 auto-scroll">
+            <Each obs$={filteredList$}>
+              {(item) => (
+                <li
+                  key={item.ticker}
+                  className={cn({ 'is-highlighted': item.ticker === $(selected$) })}
+                  onClick={() => onSelect(item.ticker)}
+                >
+                  <AssetItem {...item} />
+                </li>
+              )}
+            </Each>
+          </ul>
+        </If>
       </div>
       <div className="panel-block">
         <Button fullwidth onClick={() => resetAssetFilter(options$)}>

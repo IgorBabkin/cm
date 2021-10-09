@@ -1,16 +1,11 @@
-import { BehaviorSubject, combineLatest, map, Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 import { AssetFilterOptions } from './assets/AssetFilterOptions';
 import { Asset, isAssetValid } from './assets/Asset';
 import { isMetricValid, Metric } from './metrics/Metric';
 import { MetricFilterOptions } from './metrics/MetricFilterOptions';
-import { fetchAssets, fetchMetrics } from '../api/api';
 
 export const createAssets = () => new BehaviorSubject<Asset[]>([]);
 export const createAssetFilter = () => new BehaviorSubject<AssetFilterOptions>({ searchText: '' });
-
-export const loadAssets = (list$: Subject<Asset[]>): Subscription => {
-  return fetchAssets().subscribe(list$);
-};
 
 export const updateAssetFilter = (
   filter$: BehaviorSubject<AssetFilterOptions>,
@@ -32,8 +27,6 @@ export const filterAssets = (
 
 export const createMetrics = () => new BehaviorSubject<Metric[]>([]);
 export const createMetricFilter = () => new BehaviorSubject<MetricFilterOptions>({ searchText: '' });
-
-export const loadMetrics = (list$: Subject<Metric[]>): Subscription => fetchMetrics().subscribe(list$);
 
 export const updateMetricFilter = (
   filter$: BehaviorSubject<MetricFilterOptions>,

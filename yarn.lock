@@ -5393,10 +5393,10 @@ react@^17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
-reactivex-react@^4.1.16:
-  version "4.1.16"
-  resolved "https://registry.yarnpkg.com/reactivex-react/-/reactivex-react-4.1.16.tgz#218ffc3852477a34f87d89e5f22fbad42f0d575c"
-  integrity sha512-XVQ44LoxCgO56BuuY4o7b/wDi/HhTNYOifp1xFG1zlpbAVJHuOTxX5keZDK+qA866CfxdHo4ATsNBllxW/5OnA==
+reactivex-react@^4.1.17:
+  version "4.1.17"
+  resolved "https://registry.yarnpkg.com/reactivex-react/-/reactivex-react-4.1.17.tgz#219730303663166ec2b65470e6f783c4645effc2"
+  integrity sha512-MBMeFDJWICZlMZNR57Y/swigJnZvycIecBgm+JFt4tkdm32rtOmROhk7qHxntFeRT9zYn/MLNQqhB/lhg3EVqg==
 
 read-pkg-up@^3.0.0:
   version "3.0.0"
