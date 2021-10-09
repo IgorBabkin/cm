@@ -2,7 +2,7 @@ import React, { FC, useEffect, useMemo } from 'react';
 import { Each, If, useObservables } from 'reactivex-react';
 import cn from 'classnames';
 import { Ticker } from '../../domain/assets/Asset';
-import { mapTo, Observable, shareReplay, startWith } from 'rxjs';
+import { mapTo, Observable, shareReplay } from 'rxjs';
 import { useAssetFilterOptions, useAssetList } from '../context';
 import { filterAssets, resetAssetFilter, updateMetricFilter } from '../../domain/useCases';
 import { SearchInput } from '../../ui/SearchInput';
