@@ -1,4 +1,4 @@
-import { BehaviorSubject, combineLatest, map, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, Subject, Subscription } from 'rxjs';
 import { AssetFilterOptions } from './assets/AssetFilterOptions';
 import { Asset, isAssetValid } from './assets/Asset';
 import { isMetricValid, Metric } from './metrics/Metric';
@@ -8,7 +8,10 @@ import { fetchAssets, fetchMetrics } from '../api/api';
 export const createAssets = () => new BehaviorSubject<Asset[]>([]);
 export const createAssetFilter = () => new BehaviorSubject<AssetFilterOptions>({ searchText: '' });
 
-export const loadAssets = (list$: BehaviorSubject<Asset[]>): Subscription => fetchAssets().subscribe(list$);
+export const loadAssets = (list$: Subject<Asset[]>): Subscription => {
+  const observable = fetchAssets();
+  return observable.subscribe(list$);
+};
 
 export const updateAssetFilter = (
   filter$: BehaviorSubject<AssetFilterOptions>,
@@ -17,7 +20,7 @@ export const updateAssetFilter = (
   filter$.next({ ...filter$.getValue(), ...options });
 };
 
-export const resetAssetFilter = (filter$: BehaviorSubject<AssetFilterOptions>) => {
+export const resetAssetFilter = (filter$: Subject<AssetFilterOptions>) => {
   filter$.next({ searchText: '' });
 };
 
@@ -31,7 +34,7 @@ export const filterAssets = (
 export const createMetrics = () => new BehaviorSubject<Metric[]>([]);
 export const createMetricFilter = () => new BehaviorSubject<MetricFilterOptions>({ searchText: '' });
 
-export const loadMetrics = (list$: BehaviorSubject<Metric[]>): Subscription => fetchMetrics().subscribe(list$);
+export const loadMetrics = (list$: Subject<Metric[]>): Subscription => fetchMetrics().subscribe(list$);
 
 export const updateMetricFilter = (
   filter$: BehaviorSubject<MetricFilterOptions>,
@@ -40,7 +43,7 @@ export const updateMetricFilter = (
   filter$.next({ ...filter$.getValue(), ...options });
 };
 
-export const resetMetricFilter = (filter$: BehaviorSubject<MetricFilterOptions>) => {
+export const resetMetricFilter = (filter$: Subject<MetricFilterOptions>) => {
   filter$.next({ searchText: '' });
 };
 

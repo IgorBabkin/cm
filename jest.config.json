@@ -4,5 +4,5 @@
         "^.+\\.tsx?$": "ts-jest"
     },
     "collectCoverage": true,
-    "coveragePathIgnorePatterns": ["/node_modules/", "/fixtures/", "/cjm/", "/esm/", "__tests__"]
+    "coveragePathIgnorePatterns": ["/node_modules/", "/build/", "/coverage/", "__tests__", "views", "utils"]
 }
