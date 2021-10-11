@@ -20,16 +20,10 @@ interface AssetListProps {
 export const MetricList: FC<AssetListProps> = ({ onSelect, selected$ }) => {
   const $ = useObservables();
 
-  const options$ = useMetricFilterOptions();
   const list$ = useMetricList();
+  const options$ = useMetricFilterOptions();
   const filteredList$ = useMemo(() => filterMetrics(list$, options$), [list$, options$]);
-  const loadMetrics$ = useMemo(() => fetchMetrics().pipe(shareReplay(1)), []);
-  const isLoaded$ = useMemo(() => loadMetrics$.pipe(mapTo(true)), [loadMetrics$]);
-
-  useEffect(() => {
-    const subscription = loadMetrics$.subscribe(list$);
-    return () => subscription.unsubscribe();
-  }, [loadMetrics$, list$]);
+  const isLoaded$ = useMemo(() => list$.pipe(mapTo(true)), [list$]);
 
   return (
     <div className="panel h-100 flex-panel">

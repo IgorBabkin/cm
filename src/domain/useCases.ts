@@ -4,7 +4,6 @@ import { Asset, isAssetValid } from './assets/Asset';
 import { isMetricValid, Metric } from './metrics/Metric';
 import { MetricFilterOptions } from './metrics/MetricFilterOptions';
 
-export const createAssets = () => new BehaviorSubject<Asset[]>([]);
 export const createAssetFilter = () => new BehaviorSubject<AssetFilterOptions>({ searchText: '' });
 
 export const updateAssetFilter = (
@@ -25,7 +24,6 @@ export const filterAssets = (
   return combineLatest([list$, options$]).pipe(map(([list, options]) => list.filter(isAssetValid(options))));
 };
 
-export const createMetrics = () => new BehaviorSubject<Metric[]>([]);
 export const createMetricFilter = () => new BehaviorSubject<MetricFilterOptions>({ searchText: '' });
 
 export const updateMetricFilter = (

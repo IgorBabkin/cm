@@ -1,17 +1,17 @@
-import { createContext, useContext } from 'react';
-import { createAssetFilter, createAssets, createMetricFilter, createMetrics } from '../domain/useCases';
+import { createContext, useContext, useMemo } from 'react';
+import { createAssetFilter, createMetricFilter } from '../domain/useCases';
+import { fetchAssets, fetchMetrics } from '../api/api';
+import { shareReplay } from 'rxjs';
 
-const AssetListContext = createContext(createAssets());
 const AssetFilterOptionsContext = createContext(createAssetFilter());
 const MetricFilterOptionsContext = createContext(createMetricFilter());
-const MetricListContext = createContext(createMetrics());
 
 export const useAssetList = () => {
-  return useContext(AssetListContext);
+  return useMemo(() => fetchAssets().pipe(shareReplay(1)), []);
 };
 
 export const useMetricList = () => {
-  return useContext(MetricListContext);
+  return useMemo(() => fetchMetrics().pipe(shareReplay(1)), []);
 };
 
 export const useAssetFilterOptions = () => {
